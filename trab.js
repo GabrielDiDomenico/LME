@@ -20,29 +20,13 @@ function xmlLoader(url){
 
   function xmlArvore(xmlNode,identacao){
     var arvoreTxt=""; //esta var armazenara o conteudo
-    for(var i=0;i<xmlNode.childNodes.length;i++){//percorrendo os filhos do nó
-        if(xmlNode.childNodes[i].nodeType == 1){//ignorar espaços em branco
-            //pegando o nome do nó
-            arvoreTxt = arvoreTxt + identacao + xmlNode.childNodes[i].nodeName + ": "
-            if(xmlNode.childNodes[i].childNodes.length==0){
-                //se não tiver filhos eu já pego o nodevalue
-                arvoreTxt = arvoreTxt + xmlNode.childNodes[i].nodeValue 
-                for(var z=0;z<xmlNode.childNodes[i].attributes.length;z++){
-                    var atrib = xmlNode.childNodes[i].attributes[z];
-                    arvoreTxt = arvoreTxt + " (" + atrib.nodeName + " = " + atrib.nodeValue + ")";
-                }
-                arvoreTxt = arvoreTxt + "<br />\n";
-            }else if(xmlNode.childNodes[i].childNodes.length>0){
-                //se tiver filhos eu tenho que pegar o valor pegando o valor do primeiro filho
-                arvoreTxt = arvoreTxt + xmlNode.childNodes[i].firstChild.nodeValue;
-                for(var z=0;z<xmlNode.childNodes[i].attributes.length;z++){
-                    var atrib = xmlNode.childNodes[i].attributes[z];
-                    arvoreTxt = arvoreTxt + " (" + atrib.nodeName + " = " + atrib.nodeValue + ")";
-                }
-                //recursividade para carregas os filhos dos filhos
-                arvoreTxt = arvoreTxt + "<br />\n" + xmlMicoxArvore(xmlNode.childNodes[i],identacao + "> > ");
-            }
-        }
-      }
+    if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
+        arvoreTxt = arvoreTxt + identacao + xmlNode.childNodes[0].nodeName + ": "
+  
+    }
+      
       return arvoreTxt;
   }
+
+xml = xmlLoader("xml.xml"); //carrega o xml
+document.write(xmlArvore(xml,"")); //printa a árvore na tela
