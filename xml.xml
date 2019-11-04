@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<pessoa>
+   <identificacao id="1">
+    <nome>Joao</nome>
+    <email>joao@mail.com</email>
+   </identificacao>
+   <identificacao id="2">
+    <nome familia="ze" data="2">Maria</nome>
+    <email>maria@mail.com
+    </email>
+   </identificacao>
+</pessoa>
