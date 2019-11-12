@@ -19,11 +19,34 @@ function xmlLoader(url){
 //Função para trabalhar com o arqv XML
 
 function xmlQueryFilmes(xmlNode,identacao){
+  topic_id_sem_hash = location.search.slice(4);//var que armazena conteúdo do GET
+  var topic_id_com_hash="#"; 
+  topic_id_com_hash += topic_id_sem_hash;//var que armazena conteúdo do GET com uma hashtag
+  topic_id_filme="";
+  var filmes_relacionados = new Array();
   var query=""; //esta var armazenara o conteudo
   var tag_atual=""; //variavel para salvar a tag atual
   var topic_id_atual="";//variavel para salvar o id do filme
   var attr_atual=""; //variavel para salvar o atributo da tag atual
   var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
+  var j=0;
+  for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
+    if(xmlNode.childNodes[0].childNodes[p].nodeName == "association"){
+      if(xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-elenco" || 
+         xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-genero" ||
+         xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-direcao" ||
+         xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-duracao" ||
+         xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-ano"){
+        if(xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value == topic_id_com_hash){
+          filmes_relacionados[j]=xmlNode.childNodes[0].childNodes[p].childNodes[3].childNodes[1].attributes[0].value.slice(1)
+          console.log(filmes_relacionados[j]);
+          j++;
+        }  
+      }
+    }
+    
+  }
+
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
     //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
@@ -33,16 +56,21 @@ function xmlQueryFilmes(xmlNode,identacao){
         if(xmlNode.childNodes[0].childNodes[i].childNodes[1].childNodes[1].nodeName=="topicRef"){
           attr_atual = xmlNode.childNodes[0].childNodes[i].childNodes[1].childNodes[1].attributes[0].value
           if(attr_atual=="#Filme"){
-            link_filme="<a href='filmes.html?id="+ topic_id_atual +"'>"
-            query = query + identacao + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a>" 
+            if(topic_id_com_hash=="#"){
+              link_filme="<a href='filmes.html?id="+ topic_id_atual +"'>"
+              query = query + identacao + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a>" 
+            }else{
+              for(var z=0; z<=filmes_relacionados.length;z++){
+                if(filmes_relacionados[z]==xmlNode.childNodes[0].childNodes[i].attributes[0].value){
+                  link_filme="<a href='filmes.html?id="+ topic_id_atual +"'>"
+                  query = query + identacao + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a>" 
+                }
+              }
+            }
           }
         }
       }
     }
-    //query = query + identacao + xmlNode.childNodes[0].childNodes[1129].nodeName + ": ";
-
-   
-
   }
     
     return query;
@@ -195,25 +223,77 @@ function xmlQueryDuracao(xmlNode){
     return query;
 }
 
+function carregaPaginaAtor(id){
+  window.location.assign("trab.html?id="+id);
+}
+function carregaPaginaGenero(id){
+  window.location.assign("trab.html?id="+id);
+}
+function carregaPaginaDirecao(id){
+  window.location.assign("trab.html?id="+id);
+}
+function carregaPaginaAnos(id){
+  window.location.assign("trab.html?id="+id);
+}
+function carregaPaginaDuracao(id){
+  window.location.assign("trab.html?id="+id);
+}
+
+$('#duracao').ready(function() {
+  $('#ator option').each(function() {
+    // se localizar a frase, define o atributo selected
+    if($(this).attr('value') == topic_id_sem_hash) {
+      $(this).attr('selected', true);
+    }
+  });
+  $('#genero option').each(function() {
+    // se localizar a frase, define o atributo selected
+    if($(this).attr('value') == topic_id_sem_hash) {
+      $(this).attr('selected', true);
+    }
+  });
+  $('#ano option').each(function() {
+    // se localizar a frase, define o atributo selected
+    if($(this).attr('value') == topic_id_sem_hash) {
+      $(this).attr('selected', true);
+    }
+  });
+  $('#diretor option').each(function() {
+    // se localizar a frase, define o atributo selected
+    if($(this).attr('value') == topic_id_sem_hash) {
+      $(this).attr('selected', true);
+    }
+  });
+  $('#duracao option').each(function() {
+    // se localizar a frase, define o atributo selected
+    if($(this).attr('value') == topic_id_sem_hash) {
+      $(this).attr('selected', true);
+    }
+  });
+});
+
+
 
 xml = xmlLoader("xml.xml"); //carrega o xml
 document.write("<center>");
 document.write("<h1>Site Giozão Movies</h1>");
+document.write("<br><img src='gio.jpeg' height='200' width='200'><br>");
 document.write("<h2>Se quiser, filtre os filmes que estão disponíveis</h2>");
 document.write("<h3>Ator: ");
-document.write("<select>");
+document.write("<select id='ator' onchange='carregaPaginaAtor(this.value);'>");
 document.write(xmlQueryAtores(xml)); //printa a query na tela
 document.write("</select> | Gênero: ");
-document.write("<select>");
+document.write("<select id='genero' onchange='carregaPaginaGenero(this.value);'>");
 document.write(xmlQueryGeneros(xml)); //printa a query na tela
 document.write("</select> | Diretor: ");
-document.write("<select>");
+document.write("<select id='diretor' onchange='carregaPaginaDirecao(this.value);'>");
 document.write(xmlQueryDirecao(xml)); //printa a query na tela
 document.write("</select> | Ano: ");
-document.write("<select>");
+document.write("<select id='ano' onchange='carregaPaginaAnos(this.value);'>");
 document.write(xmlQueryAnos(xml)); //printa a query na tela
 document.write("</select> | Duração: ");
-document.write("<select>");
+document.write("<select id='duracao' onchange='carregaPaginaDuracao(this.value);'>");
 document.write(xmlQueryDuracao(xml)); //printa a query na tela
 document.write("</select></h3>");
+document.write("<br><a href='trab.html'><button>Resetar busca</button></a><br>");
 document.write(xmlQueryFilmes(xml,"<br>")); //printa a query na tela

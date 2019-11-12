@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+  <head>
+    <meta charset="utf-8">
+    <title>Trabalho Js - XML</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      console.log("oi");
+
+      //Para carregar o arquivo XML em todos os navegadores
+
+      function xmlLoader(url){
+        if(window.XMLHttpRequest){
+          var Loader = new XMLHttpRequest();
+          Loader.open("GET", url ,false);
+          Loader.send(null);
+          return Loader.responseXML;
+        }else if(window.ActiveXObject){
+          var Loader = new ActiveXObject("Msxml2.DOMDocument.3.0");
+          Loader.async = false;
+          Loader.load(url);
+          return Loader;
+        }
+      }
+
+      function xmlQueryFilmes(xmlNode,identacao){
+          topic_id_sem_hash = "id_2000";//var que armazena conteúdo do GET
+          var topic_id_com_hash="#"; 
+          topic_id_com_hash += topic_id_sem_hash;//var que armazena conteúdo do GET com uma hashtag
+          topic_id_filme="";
+          var filmes_relacionados = new Array();
+          var query=""; //esta var armazenara o conteudo
+          var tag_atual=""; //variavel para salvar a tag atual
+          var topic_id_atual="";//variavel para salvar o id do filme
+          var attr_atual=""; //variavel para salvar o atributo da tag atual
+          var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
+          query+="<center><h1>Pergunta:</h1>"
+          query+="<h3>c) Quais são os títulos em inglês dos filmes que tem a palavra “especial” na sinopse?</h3>"
+          query+="<h1>Resposta da query</h1>"
+          var j=0;
+          for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
+            if(xmlNode.childNodes[0].childNodes[p].nodeName == "topic"){
+              if(xmlNode.childNodes[0].childNodes[p].childNodes.length>9){
+                if(xmlNode.childNodes[0].childNodes[p].childNodes[9].childNodes[1].childNodes[1].attributes[0].value == "#sinopse"){
+                  filmes_relacionados[j]=xmlNode.childNodes[0].childNodes[p].childNodes[9].childNodes[3].textContent;
+                  if(filmes_relacionados[j].match(/\bespecial\b/)){
+                    query+= xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[3].textContent
+                  }
+                  j++;
+                }
+              }
+            }
+          }
+
+          
+            return query;
+        }
+
+      
+
+    xml = xmlLoader("../xml.xml"); //carrega o xml
+    document.write(xmlQueryFilmes(xml)); //printa a query na tela
+    document.write("<br><a href='questao02.html'><h3>Questão Anterior <-</a>     ");
+    document.write("<a href='questao04.html'>Próxima Questão -></h3></a><br>");
+    </script>
+  </head>
+  <body>
+      <!-- Trabalho feito por Gabriel Di Domenico e Rene  -->
+  </body>
+</html>

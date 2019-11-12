@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+  <head>
+    <meta charset="utf-8">
+    <title>Trabalho Js - XML</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      console.log("oi");
+
+      //Para carregar o arquivo XML em todos os navegadores
+
+      function xmlLoader(url){
+        if(window.XMLHttpRequest){
+          var Loader = new XMLHttpRequest();
+          Loader.open("GET", url ,false);
+          Loader.send(null);
+          return Loader.responseXML;
+        }else if(window.ActiveXObject){
+          var Loader = new ActiveXObject("Msxml2.DOMDocument.3.0");
+          Loader.async = false;
+          Loader.load(url);
+          return Loader;
+        }
+      }
+
+   
+
+      function xmlQueryFilmes(xmlNode,identacao){
+          topic_id_sem_hash = "thriller";//var que armazena conteúdo do GET
+          var topic_id_com_hash="#"; 
+          topic_id_com_hash += topic_id_sem_hash;//var que armazena conteúdo do GET com uma hashtag
+          topic_id_filme="";
+          var filmes_relacionados = new Array();
+          var query=""; //esta var armazenara o conteudo
+          var tag_atual=""; //variavel para salvar a tag atual
+          var topic_id_atual="";//variavel para salvar o id do filme
+          var attr_atual=""; //variavel para salvar o atributo da tag atual
+          var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
+          var numero_de_filmes=0;
+          var nome_das_pessoas= new Array();
+
+          if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
+            //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+            for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
+              tag_atual = xmlNode.childNodes[0].childNodes[i].nodeName
+              if(tag_atual=="topic"){
+                topic_id_atual = xmlNode.childNodes[0].childNodes[i].attributes[0].value;
+                if(xmlNode.childNodes[0].childNodes[i].childNodes[1].childNodes[1].nodeName=="topicRef"){
+                  attr_atual = xmlNode.childNodes[0].childNodes[i].childNodes[1].childNodes[1].attributes[0].value
+                  if(attr_atual=="#Filme"){
+                    if(xmlNode.childNodes[0].childNodes[i].childNodes.length>10){
+                      //Bloco de código para pegar o elenco apoio
+                      var j=11;//Var para indicar o caminho, começa no 11 pois é o inicial padrão para começar a mostrar o elenco apoio
+                        if(j==xmlNode.childNodes[0].childNodes[i].childNodes.length){
+                          continue;
+                        }else{
+                          var contador_elenco_apoio=0;
+                          while(xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[1].childNodes[1].attributes[0].value=="#elencoApoio"){
+                            nome_das_pessoas.push(xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[3].textContent);
+                            if(j+2==xmlNode.childNodes[0].childNodes[i].childNodes.length){
+                              if(topic_id_sem_hash=="a-lista-de-schindler" || topic_id_sem_hash=="conan-o-barbaro" ||
+                                topic_id_sem_hash=="conan-o-destruidor"){
+                                j+=2;
+                              }
+                              break;
+                            }
+                            j+=2;
+                          }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        //bloco para pegar o nome de todos os atores que estão referenciados pelo id #Elenco
+        var query_q6=""; //esta var armazenara o conteudo
+        var tag_atual_q6=""; //variavel para salvar a tag atual
+        var topic_id_atual_q6="";//variavel para salvar o id do filme
+        var attr_atual_q6=""; //variavel para salvar o atributo da tag atual
+        if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
+          //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+          for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
+            tag_atual_q6 = xmlNode.childNodes[0].childNodes[i]
+            if(tag_atual_q6.nodeName=="topic"){
+              topic_id_atual_q6 = tag_atual_q6.childNodes[1];
+              if(topic_id_atual_q6.nodeName=="instanceOf"){
+                if(topic_id_atual_q6.childNodes[1].attributes[0].value=="#Elenco"){
+                  nome_das_pessoas.push(tag_atual_q6.childNodes[3].childNodes[1].textContent);
+                } 
+              } 
+            }
+          }
+        }
+        console.log(nome_das_pessoas);
+
+        var j=0;
+        for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
+          if(xmlNode.childNodes[0].childNodes[p].nodeName == "topic"){
+            if(xmlNode.childNodes[0].childNodes[p].childNodes.length>9){
+              if(xmlNode.childNodes[0].childNodes[p].childNodes[9].childNodes[1].childNodes[1].attributes[0].value == "#sinopse"){
+                filmes_relacionados[j]=xmlNode.childNodes[0].childNodes[p].childNodes[9].childNodes[3].textContent;
+                for(var z=0;z<=nome_das_pessoas.length;z++){
+                  if(filmes_relacionados[j].match(nome_das_pessoas[z])){
+                    query+= xmlNode.childNodes[0].childNodes[p].attributes[0].value + "<br>"
+                    break;
+                  }
+                }
+                j++;
+              }
+            }
+          }
+        }
+
+        return query;
+      }
+
+
+
+      xml = xmlLoader("../xml.xml"); //carrega o xml
+      document.write("<center><h1>Pergunta:</h1>");
+      document.write("<h3>f) Quais são os ID dos filmes que tem o nome de algum membro do elenco citado na sinopse?</h3>");
+      document.write("<h1>Resposta da query</h1>");
+      document.write(xmlQueryFilmes(xml,"<br>")); //printa a query na tela
+      document.write("<br><h3><a href='questao05.html'><h3>Questão Anterior <-</a></h3>");
+    </script>
+  </head>
+  <body>
+      <!-- Trabalho feito por Gabriel Di Domenico e Rene  -->
+  </body>
+</html>

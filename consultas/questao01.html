@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+    <head>
+        <meta charset="utf-8">
+        <title>Trabalho Js - XML</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+          console.log("oi");
+
+          //Para carregar o arquivo XML em todos os navegadores
+
+          function xmlLoader(url){
+            if(window.XMLHttpRequest){
+              var Loader = new XMLHttpRequest();
+              Loader.open("GET", url ,false);
+              Loader.send(null);
+              return Loader.responseXML;
+            }else if(window.ActiveXObject){
+              var Loader = new ActiveXObject("Msxml2.DOMDocument.3.0");
+              Loader.async = false;
+              Loader.load(url);
+              return Loader;
+            }
+          }
+
+          function xmlQueryGeneros(xmlNode){
+            var texto=new Array();
+            var aux="";
+            var j=0;
+            var query=""; //esta var armazenara o conteudo
+            var tag_atual=""; //variavel para salvar a tag atual
+            var topic_id_atual="";//variavel para salvar o id do filme
+            var attr_atual=""; //variavel para salvar o atributo da tag atual
+            var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
+            query+="<center><h1>Pergunta:</h1>"
+            query+="<h3>a) Quais são os tipos de gênero de filmes, sem repetição?</h3>"
+            query+="<h1>Resposta da query</h1>"
+            if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
+              //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+              for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
+                tag_atual = xmlNode.childNodes[0].childNodes[i]
+                if(tag_atual.nodeName=="topic"){
+                  topic_id_atual = tag_atual.childNodes[1];
+                  if(topic_id_atual.nodeName=="instanceOf"){
+                    if(topic_id_atual.childNodes[1].attributes[0].value=="#Genero"){
+                      
+                      texto[j]=tag_atual.childNodes[3].childNodes[1].textContent.replace(" ", "");;
+                      j++;
+                    } 
+                  } 
+                }
+              }
+            }
+            
+            for(var i=0;i<=texto.length-1;i++){
+              if(aux==texto[i]){
+                continue;
+              }
+              aux=texto[i];
+              if(aux!=="Aventura/FicçãoCientífica"){
+                query+= texto[i];
+                query+= "<br>";
+              }else{
+                query+="";
+              }
+              
+              
+            }
+            console.log(texto);
+            return query;
+        }
+
+        xml = xmlLoader("../xml.xml"); //carrega o xml
+        document.write(xmlQueryGeneros(xml)); //printa a query na tela
+        document.write("<br><a href='questao02.html?id=id_2000'><h3>Próxima Questão -></h3></a>");
+        </script>
+    </head>
+    <body>
+        <!-- Trabalho feito por Gabriel Di Domenico e Rene  -->
+    </body>
+</html>
