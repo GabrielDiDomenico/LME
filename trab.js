@@ -278,7 +278,8 @@ xml = xmlLoader("xml.xml"); //carrega o xml
 document.write("<center>");
 document.write("<h1>Site Giozão Movies</h1>");
 document.write("<br><img src='gio.jpeg' height='200' width='200'><br>");
-document.write("<h2>Se quiser, filtre os filmes que estão disponíveis</h2>");
+document.write("<h3>Se quiser, filtre os filmes que estão disponíveis</h3>");
+document.write("<h3>OBS: As buscas são feitas uma por vez</h3><br>");
 document.write("<h3>Ator: ");
 document.write("<select id='ator' onchange='carregaPaginaAtor(this.value);'>");
 document.write(xmlQueryAtores(xml)); //printa a query na tela
@@ -295,5 +296,6 @@ document.write("</select> | Duração: ");
 document.write("<select id='duracao' onchange='carregaPaginaDuracao(this.value);'>");
 document.write(xmlQueryDuracao(xml)); //printa a query na tela
 document.write("</select></h3>");
+document.write("<h3>Se você quer voltar para todos os filmes clique no botão</h3>");
 document.write("<br><a href='trab.html'><button>Resetar busca</button></a><br>");
 document.write(xmlQueryFilmes(xml,"<br>")); //printa a query na tela

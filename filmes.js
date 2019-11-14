@@ -120,7 +120,7 @@ function xmlQueryTopicos(xmlNode,identacao){
                     if(xmlNode.childNodes[0].childNodes[k].nodeName == "topic"){
                       if(xmlNode.childNodes[0].childNodes[k].attributes[0].value ==
                         xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1)){
-                          query = query + xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + ", "
+                          query = query + "<a href='trab.html?id=" + xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1) + "'>" +  xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + "</a>" + ", "
                       }
                     }
                   }
@@ -142,7 +142,7 @@ function xmlQueryTopicos(xmlNode,identacao){
                     if(xmlNode.childNodes[0].childNodes[k].nodeName == "topic"){
                       if(xmlNode.childNodes[0].childNodes[k].attributes[0].value ==
                         xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1)){
-                          query = query + xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + ", "
+                          query = query + "<a href='trab.html?id=" + xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1) + "'>" +  xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + "</a>" + ", "
                       }
                     }
                   }
@@ -192,7 +192,7 @@ function xmlQueryTopicos(xmlNode,identacao){
                     if(xmlNode.childNodes[0].childNodes[k].nodeName == "topic"){
                       if(xmlNode.childNodes[0].childNodes[k].attributes[0].value ==
                         xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1)){
-                          query = query + xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + ", "
+                          query = query + "<a href='trab.html?id=" + xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1) + "'>" +  xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + "</a>" + ", "
                       }
                     }
                   }
@@ -214,7 +214,7 @@ function xmlQueryTopicos(xmlNode,identacao){
                     if(xmlNode.childNodes[0].childNodes[k].nodeName == "topic"){
                       if(xmlNode.childNodes[0].childNodes[k].attributes[0].value ==
                         xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1)){
-                          query = query + xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + ", "
+                          query = query + "<a href='trab.html?id=" + xmlNode.childNodes[0].childNodes[p].childNodes[5].childNodes[1].attributes[0].value.substr(1) + "'>" + xmlNode.childNodes[0].childNodes[k].childNodes[3].childNodes[1].textContent + "</a>" + ", "
                       }
                     }
                   }
