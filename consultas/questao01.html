@@ -43,8 +43,12 @@
                   topic_id_atual = tag_atual.childNodes[1];
                   if(topic_id_atual.nodeName=="instanceOf"){
                     if(topic_id_atual.childNodes[1].attributes[0].value=="#Genero"){
-                      
-                      texto[j]=tag_atual.childNodes[3].childNodes[1].textContent.replace(" ", "");;
+                      texto[j]=tag_atual.childNodes[3].childNodes[1].textContent.replace(" ", "").replace(" ", "").replace(" ", "");
+                      if(aux!=texto[j]){
+                        aux=texto[j];
+                        query+=tag_atual.childNodes[3].childNodes[1].textContent;
+                        query+="<br>";
+                      }
                       j++;
                     } 
                   } 
@@ -52,27 +56,14 @@
               }
             }
             
-            for(var i=0;i<=texto.length-1;i++){
-              if(aux==texto[i]){
-                continue;
-              }
-              aux=texto[i];
-              if(aux!=="Aventura/FicçãoCientífica"){
-                query+= texto[i];
-                query+= "<br>";
-              }else{
-                query+="";
-              }
-              
-              
-            }
+            
             console.log(texto);
             return query;
         }
 
         xml = xmlLoader("../xml.xml"); //carrega o xml
         document.write(xmlQueryGeneros(xml)); //printa a query na tela
-        document.write("<br><a href='questao02.html?id=id_2000'><h3>Próxima Questão -></h3></a>");
+        document.write("<br><a href='questao02.html'><h3>Próxima Questão -></h3></a>");
         </script>
     </head>
     <body>
