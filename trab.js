@@ -277,25 +277,29 @@ $('#duracao').ready(function() {
 xml = xmlLoader("xml.xml"); //carrega o xml
 document.write("<center>");
 document.write("<h1>Site Giozão Movies</h1>");
-document.write("<br><img src='gio.jpeg' height='200' width='200'><br>");
+document.write(`<img src='gio.jpeg' style="margin:1em 0; width: 200px">`);
 document.write("<h3>Se quiser, filtre os filmes que estão disponíveis</h3>");
 document.write("<h3>OBS: As buscas são feitas uma por vez</h3><br>");
-document.write("<h3>Ator: ");
-document.write("<select id='ator' onchange='carregaPaginaAtor(this.value);'>");
-document.write(xmlQueryAtores(xml)); //printa a query na tela
-document.write("</select> | Gênero: ");
-document.write("<select id='genero' onchange='carregaPaginaGenero(this.value);'>");
-document.write(xmlQueryGeneros(xml)); //printa a query na tela
-document.write("</select> | Diretor: ");
-document.write("<select id='diretor' onchange='carregaPaginaDirecao(this.value);'>");
-document.write(xmlQueryDirecao(xml)); //printa a query na tela
-document.write("</select> | Ano: ");
-document.write("<select id='ano' onchange='carregaPaginaAnos(this.value);'>");
-document.write(xmlQueryAnos(xml)); //printa a query na tela
-document.write("</select> | Duração: ");
-document.write("<select id='duracao' onchange='carregaPaginaDuracao(this.value);'>");
-document.write(xmlQueryDuracao(xml)); //printa a query na tela
-document.write("</select></h3>");
+document.write(`<div class="container">`);
+document.write(`<div class="row search-options">`);
+    document.write(`<div class="col-md">Ator:<br>`);
+      document.write("<select id='ator' onchange='carregaPaginaAtor(this.value);'>");
+      document.write(xmlQueryAtores(xml)); //printa a query na tela
+    document.write(`</select> </div><div class="col-md">Gênero:<br>`);
+      document.write("<select id='genero' onchange='carregaPaginaGenero(this.value);'>");
+      document.write(xmlQueryGeneros(xml)); //printa a query na tela
+    document.write(`</select> </div><div class="col-md"> Diretor:<br>`);
+      document.write("<select id='diretor' onchange='carregaPaginaDirecao(this.value);'>");
+      document.write(xmlQueryDirecao(xml)); //printa a query na tela
+    document.write(`</select> </div><div class="col-md"> Ano:<br>`);
+      document.write("<select id='ano' onchange='carregaPaginaAnos(this.value);'>");
+      document.write(xmlQueryAnos(xml)); //printa a query na tela
+    document.write(`</select> </div><div class="col-md"> Duração:<br>`);
+      document.write("<select id='duracao' onchange='carregaPaginaDuracao(this.value);'>");
+      document.write(xmlQueryDuracao(xml)); //printa a query na tela
+    document.write("</select> </div>");
+  document.write(`</div>`);
+document.write(`</div>`);
 document.write("<h3>Se você quer voltar para todos os filmes clique no botão</h3>");
 document.write("<br><a href='trab.html'><button>Resetar busca</button></a><br>");
 document.write(xmlQueryFilmes(xml,"<br>")); //printa a query na tela
