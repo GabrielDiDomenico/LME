@@ -18,7 +18,7 @@ function xmlLoader(url){
 
 //Função para trabalhar com o arqv XML
 
-function xmlQueryFilmes(xmlNode,identacao){
+function xmlQueryFilmes(xmlNode){
   topic_id_sem_hash = location.search.slice(4);//var que armazena conteúdo do GET
   var topic_id_com_hash="#"; 
   topic_id_com_hash += topic_id_sem_hash;//var que armazena conteúdo do GET com uma hashtag
@@ -48,7 +48,7 @@ function xmlQueryFilmes(xmlNode,identacao){
   }
 
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
-    //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+    //query = query + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
       tag_atual = xmlNode.childNodes[0].childNodes[i].nodeName
       if(tag_atual=="topic"){
@@ -57,13 +57,13 @@ function xmlQueryFilmes(xmlNode,identacao){
           attr_atual = xmlNode.childNodes[0].childNodes[i].childNodes[1].childNodes[1].attributes[0].value
           if(attr_atual=="#Filme"){
             if(topic_id_com_hash=="#"){
-              link_filme="<a href='filmes.html?id="+ topic_id_atual +"'>"
-              query = query + identacao + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a>" 
+              link_filme="<li><a href='filmes.html?id="+ topic_id_atual +"'>"
+              query = query + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a></li>" 
             }else{
               for(var z=0; z<=filmes_relacionados.length;z++){
                 if(filmes_relacionados[z]==xmlNode.childNodes[0].childNodes[i].attributes[0].value){
-                  link_filme="<a href='filmes.html?id="+ topic_id_atual +"'>"
-                  query = query + identacao + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a>" 
+                  link_filme="<li><a href='filmes.html?id="+ topic_id_atual +"'>"
+                  query = query + link_filme + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + "</a></li>" 
                 }
               }
             }
@@ -73,7 +73,7 @@ function xmlQueryFilmes(xmlNode,identacao){
     }
   }
     
-    return query;
+    return "<ul style='list-style-type: none; padding: 0;'>" + query + "</ul>";
 }
 
 function xmlQueryAtores(xmlNode){
@@ -83,7 +83,7 @@ function xmlQueryAtores(xmlNode){
   var attr_atual=""; //variavel para salvar o atributo da tag atual
   var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
-    //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+    //query = query + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
       tag_atual = xmlNode.childNodes[0].childNodes[i]
       if(tag_atual.nodeName=="topic"){
@@ -110,7 +110,7 @@ function xmlQueryGeneros(xmlNode){
   var attr_atual=""; //variavel para salvar o atributo da tag atual
   var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
-    //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+    //query = query + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
       tag_atual = xmlNode.childNodes[0].childNodes[i]
       if(tag_atual.nodeName=="topic"){
@@ -140,7 +140,7 @@ function xmlQueryDirecao(xmlNode){
   var attr_atual=""; //variavel para salvar o atributo da tag atual
   var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
-    //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+    //query = query + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
       tag_atual = xmlNode.childNodes[0].childNodes[i]
       if(tag_atual.nodeName=="topic"){
@@ -170,7 +170,7 @@ function xmlQueryAnos(xmlNode){
   var attr_atual=""; //variavel para salvar o atributo da tag atual
   var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
-    //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+    //query = query + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
       tag_atual = xmlNode.childNodes[0].childNodes[i]
       if(tag_atual.nodeName=="topic"){
@@ -200,7 +200,7 @@ function xmlQueryDuracao(xmlNode){
   var attr_atual=""; //variavel para salvar o atributo da tag atual
   var link_filme=""; //variavel para salvar o link e não atrapalhar o caminho da arvore
   if(xmlNode.childNodes[0].nodeType == 1){//ignorar espaços em branco
-    //query = query + identacao + xmlNode.childNodes[0].nodeName + ": "
+    //query = query + xmlNode.childNodes[0].nodeName + ": "
     for(var i=0;i<xmlNode.childNodes[0].childNodes.length;i++){
       tag_atual = xmlNode.childNodes[0].childNodes[i]
       if(tag_atual.nodeName=="topic"){
@@ -276,30 +276,31 @@ $('#duracao').ready(function() {
 
 xml = xmlLoader("xml.xml"); //carrega o xml
 document.write("<center>");
-document.write("<h1>Site Giozão Movies</h1>");
-document.write(`<img src='gio.jpeg' style="margin:1em 0; width: 200px">`);
+document.write("<h1 style='font-size: 5rem'>Giozão Movies</h1>");
+document.write(`<img src='gio.jpeg' style="margin:1rem 0; width: 200px">`);
 document.write("<h3>Se quiser, filtre os filmes que estão disponíveis</h3>");
 document.write("<h3>OBS: As buscas são feitas uma por vez</h3><br>");
-document.write(`<div class="container">`);
+document.write(`<div class="container" style="margin: 0 0 2rem 0">`);
 document.write(`<div class="row search-options">`);
     document.write(`<div class="col-md">Ator:<br>`);
-      document.write("<select id='ator' onchange='carregaPaginaAtor(this.value);'>");
+      document.write(`<select id='ator' onchange='carregaPaginaAtor(this.value);' class="form-control">`);
       document.write(xmlQueryAtores(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md">Gênero:<br>`);
-      document.write("<select id='genero' onchange='carregaPaginaGenero(this.value);'>");
+      document.write(`<select id='genero' onchange='carregaPaginaGenero(this.value);' class="form-control">`);
       document.write(xmlQueryGeneros(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md"> Diretor:<br>`);
-      document.write("<select id='diretor' onchange='carregaPaginaDirecao(this.value);'>");
+      document.write(`<select id='diretor' onchange='carregaPaginaDirecao(this.value);' class="form-control">`);
       document.write(xmlQueryDirecao(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md"> Ano:<br>`);
-      document.write("<select id='ano' onchange='carregaPaginaAnos(this.value);'>");
+      document.write(`<select id='ano' onchange='carregaPaginaAnos(this.value);' class="form-control">`);
       document.write(xmlQueryAnos(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md"> Duração:<br>`);
-      document.write("<select id='duracao' onchange='carregaPaginaDuracao(this.value);'>");
+      document.write(`<select id='duracao' onchange='carregaPaginaDuracao(this.value);' class="form-control">`);
       document.write(xmlQueryDuracao(xml)); //printa a query na tela
     document.write("</select> </div>");
   document.write(`</div>`);
 document.write(`</div>`);
-document.write("<h3>Se você quer voltar para todos os filmes clique no botão</h3>");
-document.write("<br><a href='trab.html'><button>Resetar busca</button></a><br>");
-document.write(xmlQueryFilmes(xml,"<br>")); //printa a query na tela
+//document.write("<h3>Se você quer voltar para todos os filmes clique no botão</h3>");
+document.write(`<a href='trab.html'><button class="btn btn-primary" style="margin: 0 0 1rem 0">Zerar Pesquisa</button></a>`);
+document.write(xmlQueryFilmes(xml)); //printa a query na tela
+document.write("</center>");
