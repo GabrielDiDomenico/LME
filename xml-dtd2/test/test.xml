@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Nome: Gabriel Di Domenico -->
+<!DOCTYPE ementa SYSTEM "test.dtd">
+<ementa>
+    <corpo>
+        <bloco>
+	        <titulo>Cï¿½digo e Nome</titulo> 
+            <texto id="cod">ELC1092</texto><texto id="nome"> LINGUAGENS DE MARCAï¿½ï¿½O EXTENSï¿½VEIS </texto>
+        </bloco>
+        <bloco>
+	        <titulo>Departamento</titulo> 
+            <texto id="dep">DEPARTAMENTO DE LINGUAGENS E SISTEMAS DE COMPUTAï¿½ï¿½O</texto>
+            <titulo>Tipo de atividade</titulo> 
+            <texto id="tipo_atv">Disciplina </texto>
+            <titulo>Crï¿½ditos</titulo> 
+            <texto id="num_cred">4</texto>
+        </bloco>
+        <bloco>
+            <titulo>Carga horï¿½ria (horas-aula)</titulo> 
+            <texto id="carga_hora">Prï¿½tica: 15 Teï¿½rica: 45 Total: 60</texto>
+            <titulo>Encargo didï¿½tico</titulo> 
+            <texto id="encargo">60 horas-aula</texto>
+        </bloco>
+        <bloco>
+            <titulo>Objetivos</titulo> 
+            <texto id="obj">
+            Ganhar familiaridade com os conceitos de anotaï¿½ï¿½o (marcaï¿½ï¿½o) de documentos e as tecnologias correntes para a especificaï¿½ï¿½o de linguagens de marcaï¿½ï¿½o.
+            Saber utilizar as tecnologias atuais para especificar linguagens e suportar a produï¿½ï¿½o de documentos, o seu processamento, a troca de informaï¿½ï¿½o em formatos normalizados e a sua preservaï¿½ï¿½o ao longo das mudanï¿½as tecnolï¿½gicas.
+            Explorar o processamento de documentos estruturados embebido em aplicaï¿½ï¿½es.
+            </texto>
+        </bloco>
+        <bloco>
+            <titulo>Ementa</titulo>
+            <lista id="ementa">
+                <item id="item1">INTRODUï¿½ï¿½O</item>
+                <item id="item2">DOCUMENTAï¿½ï¿½O ESTRUTURADA E MARCAï¿½ï¿½O</item>
+                <item id="item3">DOCUMENTOS ESTRUTURADOS: CONCEITOS</item>
+                <item id="item4">CICLO DE VIDA DOCUMENTAL</item>
+                <item id="item5">DESENVOLVIMENTO DE ESQUEMAS</item>
+                <item id="item6">FOLHAS DE ESTILOS: ESTRUTURA E CONCEITOS</item>
+                <item id="item7">ARMAZENAMENTO DE DOCUMENTOS ANOTADOS EM BANCO DE DADOS</item>
+            </lista>
+        </bloco>
+    </corpo>
+</ementa>

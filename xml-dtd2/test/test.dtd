@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT ementa (corpo)>
+<!ELEMENT corpo (bloco+)>
+<!ELEMENT bloco (titulo,(texto* | lista))+>
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT texto (#PCDATA)>
+<!ATTLIST texto 
+  id ID #REQUIRED
+>
+<!ELEMENT lista (item+)>
+<!ATTLIST lista 
+  id ID #REQUIRED
+>
+<!ELEMENT item (#PCDATA)>
+<!ATTLIST item 
+  id ID #REQUIRED
+>
+
+<!-- Nomes: Gabriel Di Domenico & Nikolas Corrêa -->
