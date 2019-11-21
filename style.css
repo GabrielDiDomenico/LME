@@ -2,6 +2,8 @@
   font-weight: bold;
 }
 
-.film-list{
-  background: red;
+ul{
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 2rem;
 }

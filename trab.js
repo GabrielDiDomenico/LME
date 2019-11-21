@@ -73,7 +73,7 @@ function xmlQueryFilmes(xmlNode){
     }
   }
     
-    return "<ul style='list-style-type: none; padding: 0;'>" + query + "</ul>";
+    return "<ul>" + query + "</ul>";
 }
 
 function xmlQueryAtores(xmlNode){
@@ -278,8 +278,8 @@ xml = xmlLoader("xml.xml"); //carrega o xml
 document.write("<center>");
 document.write("<h1 style='font-size: 5rem'>Giozão Movies</h1>");
 document.write(`<img src='gio.jpeg' style="margin:1rem 0; width: 200px">`);
-document.write("<h3>Se quiser, filtre os filmes que estão disponíveis</h3>");
-document.write("<h3>OBS: As buscas são feitas uma por vez</h3><br>");
+//document.write("<h3>Se quiser, filtre os filmes que estão disponíveis</h3>");
+//document.write("<h3>OBS: As buscas são feitas uma por vez</h3><br>");
 document.write(`<div class="container" style="margin: 0 0 2rem 0">`);
 document.write(`<div class="row search-options">`);
     document.write(`<div class="col-md">Ator:<br>`);

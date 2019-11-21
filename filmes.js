@@ -254,4 +254,4 @@ function xmlQueryTopicos(xmlNode,identacao){
 
 xml = xmlLoader("xml.xml"); //carrega o xml
 document.write(xmlQueryTopicos(xml,"<br>")); //printa a árvore na tela
-document.write("<center><a href='trab.html'><button>Voltar para o Home</button></a>");
+document.write("<center><a href='trab.html'><button class='btn btn-primary'>Voltar para o Home</button></a>");
