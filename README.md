@@ -13,7 +13,7 @@
   - A partir da LME acessar a trab.html para acessar o site
   
 ## Validação do DTD
-  - Colocar na pasta LME/xml/test/ os dois arquivos com nome de test.xml e test.dtd
+  - Colocar na pasta LME/xml-dtd2/test/ os dois arquivos com nome de test.xml e test.dtd
   - Abrir o painel do XAMPP e ativar o Apache 
   - Abrir o Google Chrome na janela anônima (para não guardar cache)
   - Acesse http://localhost/LME/xml-dtd2/test/test.html
