@@ -103,15 +103,16 @@ function xmlQueryTopicos(xmlNode,identacao){
         if(xmlNode.childNodes[0].childNodes[i].nodeName == "topic" &&
           xmlNode.childNodes[0].childNodes[i].attributes[0].value == topic_id_sem_hash){
              //Path para pegar o titulo
-             query = query + "Titulo: " + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + identacao + identacao;
+             query = query + `<div class="fita"><div class="conteudo">` + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + `</div></div>` + identacao + identacao;
+             query = `<div class="container">` + query + "<b>Título:</b> " + xmlNode.childNodes[0].childNodes[i].childNodes[3].childNodes[1].textContent + identacao + identacao;
             //Path para pegar o titulo em ingles
-            query = query + "Titulo Inglês: " + xmlNode.childNodes[0].childNodes[i].childNodes[5].childNodes[3].textContent + identacao + identacao;
+            query = query + "<b>Titulo Inglês:</b> " + xmlNode.childNodes[0].childNodes[i].childNodes[5].childNodes[3].textContent + identacao + identacao;
             //Path para pegar a distribuidora
-            query = query + "Distribuição: " + xmlNode.childNodes[0].childNodes[i].childNodes[7].childNodes[3].textContent + identacao + identacao;
+            query = query + "<b>Distribuição:</b> " + xmlNode.childNodes[0].childNodes[i].childNodes[7].childNodes[3].textContent + identacao + identacao;
             //Path para pegar a sinopse
-            query = query + "Sinopse: " + xmlNode.childNodes[0].childNodes[i].childNodes[9].childNodes[3].textContent + identacao + identacao;
+            query = query + "<b>Sinopse:</b> " + xmlNode.childNodes[0].childNodes[i].childNodes[9].childNodes[3].textContent + identacao + identacao;
             //Bloco de código para pegar a direção
-            query = query + "Direção: " 
+            query = query + "<b>Direção:</b> " 
             for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
               if(xmlNode.childNodes[0].childNodes[p].nodeName == "association"){
                 if(xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-direcao" && xmlNode.childNodes[0].childNodes[p].childNodes[3].childNodes[1].attributes[0].value == topic_id_com_hash){
@@ -133,7 +134,7 @@ function xmlQueryTopicos(xmlNode,identacao){
             query = query + identacao + identacao
             encontrou_pela_id=false;
             //Bloco de código para pegar o elenco
-            query = query + "Elenco: " 
+            query = query + "<b>Elenco:</b> " 
             for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
               if(xmlNode.childNodes[0].childNodes[p].nodeName == "association"){
                 if(xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-elenco" && xmlNode.childNodes[0].childNodes[p].childNodes[3].childNodes[1].attributes[0].value == topic_id_com_hash){
@@ -157,11 +158,11 @@ function xmlQueryTopicos(xmlNode,identacao){
             //Bloco de código para pegar o elenco apoio
             var j=11;//Var para indicar o caminho, começa no 11 pois é o inicial padrão para começar a mostrar o elenco apoio
             if(topic_id_sem_hash=="apollo-13" || topic_id_sem_hash=="genio-indomavel" || topic_id_sem_hash=="coracao-valente" || topic_id_sem_hash=="os-imperdoaveis"){
-              query = query + "Elenco Apoio: "
+              query = query + "<b>Elenco Apoio:</b> "
               query = query + "Seção não encontrada :(" + identacao + identacao
               j-=2
             }else{
-              query = query + "Elenco Apoio: "
+              query = query + "<b>Elenco Apoio:</b> "
               if(j==xmlNode.childNodes[0].childNodes[i].childNodes.length){
                 continue;
               }else{
@@ -183,7 +184,7 @@ function xmlQueryTopicos(xmlNode,identacao){
             }
             
             //Bloco de código para pegar o ano
-            query = query + "Ano: " 
+            query = query + "<b>Ano:</b> " 
             for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
               if(xmlNode.childNodes[0].childNodes[p].nodeName == "association"){
                 if(xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-ano" && xmlNode.childNodes[0].childNodes[p].childNodes[3].childNodes[1].attributes[0].value == topic_id_com_hash){
@@ -205,7 +206,7 @@ function xmlQueryTopicos(xmlNode,identacao){
             query = query + identacao + identacao
             encontrou_pela_id=false;
             //Bloco de código para pegar o genero
-            query = query + "Genero: "
+            query = query + "<b>Genero:</b> "
             for(var p=0;p<xmlNode.childNodes[0].childNodes.length;p++){
               if(xmlNode.childNodes[0].childNodes[p].nodeName == "association"){
                 if(xmlNode.childNodes[0].childNodes[p].childNodes[1].childNodes[1].attributes[0].value == "#filme-genero" && xmlNode.childNodes[0].childNodes[p].childNodes[3].childNodes[1].attributes[0].value == topic_id_com_hash){
@@ -231,10 +232,10 @@ function xmlQueryTopicos(xmlNode,identacao){
               j-=2;
             }
             if(xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[1].childNodes[1].attributes[0].value=="#elencoApoio" || (topic_id_sem_hash=="apollo-13" || topic_id_sem_hash=="genio-indomavel" || topic_id_sem_hash=="coracao-valente" || topic_id_sem_hash=="os-imperdoaveis")){
-              query = query + "Site: Seção não encontrada :(" + identacao + identacao;
+              query = query + "<b>Site:</b> Seção não encontrada :(" + identacao + identacao;
               nao_achou=false;
             }else{
-              query = query + "Site: <a href='" + xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[3].attributes[0].value+ "' target='_blank'>"+ xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[3].attributes[0].value + "</a>"+ identacao + identacao;
+              query = query + "<b>Site:</b> <a href='" + xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[3].attributes[0].value+ "' target='_blank'>"+ xmlNode.childNodes[0].childNodes[i].childNodes[j].childNodes[3].attributes[0].value + "</a>"+ identacao + identacao;
               nao_achou=false;
             }
             
@@ -249,9 +250,11 @@ function xmlQueryTopicos(xmlNode,identacao){
 
   
     
-    return query;
+    return query + `</div>`;
 }
 
 xml = xmlLoader("xml.xml"); //carrega o xml
-document.write(xmlQueryTopicos(xml,"<br>")); //printa a árvore na tela
-document.write("<center><a href='trab.html'><button class='btn btn-primary'>Voltar para o Home</button></a>");
+//document.write(`<div class="container" style="border: 1px solid black; box-shadow: -10px 10px 5px 5px rgba(0,0,0,.5); margin-top: 25px;">`);
+  document.write(xmlQueryTopicos(xml,"<br>")); //printa a árvore na tela
+  document.write("<center><a href='trab.html'><button class='btn btn-primary' style='margin-bottom:1rem;'>Página Inicial</button></a>");
+//document.write(`</div>`);

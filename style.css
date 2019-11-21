@@ -7,3 +7,68 @@ ul{
   padding: 0;
   margin-bottom: 2rem;
 }
+
+/*body{
+  background-color: rgba(0,0,0,0) !important;
+  background-image: url("sala.png");
+  background-attachment: fixed;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
+*/
+/*Fita*/
+
+.fita{
+  background: #e51c46;
+	position: relative;
+	margin:20px auto;
+	width: 300px;
+	color:#fff;
+	line-height:40px;
+	height:40px;
+	font-size: 16px;
+	text-align: center;
+	font-weight:700;
+	text-transform: uppercase;
+}
+
+.fita:before, .fita:after{
+	content: '';
+	line-height:0;
+	border-style:solid;
+	border-width: 20px;
+	position: absolute;
+	top:10px;
+	z-index: -2000;
+	width:5px;
+}
+
+.fita:before{
+	border-color: #bc1438 #bc1438 #bc1438 transparent;
+	left:-30px;
+}
+.fita:after{
+	border-color: #bc1438 transparent #bc1438 #bc1438;
+	right: -30px;
+}
+
+.conteudo:before, .conteudo:after{
+	position: absolute;
+	content: '';
+	height: 0;
+	line-height:1px;
+	border-style:solid;
+	border-width:5px;
+	z-index:-1999;
+}
+.conteudo:before{
+	border-color: #940d2a #940d2a transparent transparent;
+	bottom:-10px;
+	left: 0;
+}
+.conteudo:after{
+	border-color: #940d2a transparent transparent #940d2a;
+	bottom:-10px;
+	right: 0;
+}

@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT ementa (corpo)>
-<!ELEMENT corpo (bloco+)>
-<!ELEMENT bloco (titulo,(texto* | lista))+>
-<!ELEMENT titulo (#PCDATA)>
-<!ELEMENT texto (#PCDATA)>
-<!ATTLIST texto 
-  id ID #REQUIRED
+<!ELEMENT topicMap (topic+, association+)>
+<!ELEMENT topic (baseName | instanceOf | occurrence | subjectIdentity)+>
+<!ATTLIST topic
+	id ID #REQUIRED
 >
-<!ELEMENT lista (item+)>
-<!ATTLIST lista 
-  id ID #REQUIRED
+<!ELEMENT baseName (baseNameString | scope)+>
+<!ELEMENT baseNameString (#PCDATA)>
+<!ELEMENT scope (topicRef)>
+<!ELEMENT topicRef EMPTY>
+<!ATTLIST topicRef
+	href CDATA #IMPLIED
 >
-<!ELEMENT item (#PCDATA)>
-<!ATTLIST item 
-  id ID #REQUIRED
+<!ELEMENT instanceOf (topicRef)>
+<!ELEMENT occurrence (scope | resourceData | instanceOf | resourceRef)+>
+<!ELEMENT resourceData (#PCDATA)>
+<!ELEMENT resourceRef EMPTY>
+<!ATTLIST resourceRef
+	href CDATA #IMPLIED
 >
-
-<!-- Nomes: Gabriel Di Domenico & Nikolas Corrêa -->
+<!ELEMENT subjectIdentity (subjectIndicatorRef)>
+<!ELEMENT subjectIndicatorRef EMPTY>
+<!ATTLIST subjectIndicatorRef
+	href CDATA #IMPLIED
+>
+<!ELEMENT association (instanceOf, member+)>
+<!ELEMENT member (topicRef)>

@@ -1,5 +1,5 @@
 var xmlPath = 'test.xml';
-var xsdPath = 'test.xsd';
+var xsdPath = 'test0.xsd';
 var filesRoot = 'http://localhost/LME/xml/test/';
 
 var statusNode = document.querySelector('#status');
