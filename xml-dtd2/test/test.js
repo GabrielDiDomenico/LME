@@ -1,6 +1,6 @@
 var xmlPath = 'test.xml';
 var dtdPath = 'test.dtd';
-var filesRoot = './';
+var filesRoot = 'http://localhost/LME/xml-dtd2/test/';
 
 var statusNode = document.querySelector('#status');
 
@@ -39,7 +39,7 @@ fetchFiles.then(function(files) {
 	statusNode.textContent = 'Validating XML…';
 
 	var args = ['--noent', '--dtdvalid', dtdPath, xmlPath];
-
+	console.log(files[0].data);
 	var output = xmllint(args, files);
 
 	if (output.stderr) {
@@ -47,6 +47,6 @@ fetchFiles.then(function(files) {
 		document.getElementById('lint').textContent = output.stderr;
 	} else {
 		statusNode.textContent = 'Valid!';
-		document.getElementById('xml').textContent = output.stdout;
+		document.getElementById('xml').textContent = "The XML is Valid!";
 	}
 });
