@@ -283,19 +283,19 @@ document.write(`<img src='gio.jpeg' style="margin:1rem 0; width: 200px">`);
 document.write(`<div class="container" style="margin: 0 0 2rem 0">`);
 document.write(`<div class="row search-options">`);
     document.write(`<div class="col-md">Ator:<br>`);
-      document.write(`<select id='ator' onchange='carregaPaginaAtor(this.value);' class="form-control">`);
+      document.write(`<select id='ator' onchange='carregaPaginaAtor(this.value);' class="form-control"><option value='#'>Todos</option>`);
       document.write(xmlQueryAtores(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md">Gênero:<br>`);
-      document.write(`<select id='genero' onchange='carregaPaginaGenero(this.value);' class="form-control">`);
+      document.write(`<select id='genero' onchange='carregaPaginaGenero(this.value);' class="form-control"><option value='#'>Todos</option>`);
       document.write(xmlQueryGeneros(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md"> Diretor:<br>`);
-      document.write(`<select id='diretor' onchange='carregaPaginaDirecao(this.value);' class="form-control">`);
+      document.write(`<select id='diretor' onchange='carregaPaginaDirecao(this.value);' class="form-control"><option value='#'>Todos</option>`);
       document.write(xmlQueryDirecao(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md"> Ano:<br>`);
-      document.write(`<select id='ano' onchange='carregaPaginaAnos(this.value);' class="form-control">`);
+      document.write(`<select id='ano' onchange='carregaPaginaAnos(this.value);' class="form-control"><option value='#'>Todos</option>`);
       document.write(xmlQueryAnos(xml)); //printa a query na tela
     document.write(`</select> </div><div class="col-md"> Duração:<br>`);
-      document.write(`<select id='duracao' onchange='carregaPaginaDuracao(this.value);' class="form-control">`);
+      document.write(`<select id='duracao' onchange='carregaPaginaDuracao(this.value);' class="form-control"><option value='#'>Todos</option>`);
       document.write(xmlQueryDuracao(xml)); //printa a query na tela
     document.write("</select> </div>");
   document.write(`</div>`);
