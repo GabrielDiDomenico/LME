@@ -24,7 +24,7 @@ var fetchIndex = fetchFile('index.txt', filesRoot).then(function(file) {
 });
 
 var fetchFiles = fetchIndex.then(function(files) {
-	// fetch the DTD files
+	// fetch the XSD files
 	var requests = files.map(function(file) {
 		return fetchFile(file, filesRoot);
 	});
